@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>College Event Management - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4">
+
+  <div class="w-full max-w-md">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-900">College Event Management</h1>
+      <p class="text-gray-600 mt-2">Connect, participate, and manage campus events</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white shadow-xl rounded-2xl p-6">
+      
+      <!-- Login Form -->
+      <form method="post" action="" class="space-y-4">
+        
+        
+        <div>
+          <label for="email" class="block text-sm font-medium">Email</label>
+          <input type="email" id="email" name="email" placeholder="your.email@college.edu"
+            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password"
+            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+        </div>
+
+        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-900">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Demo info -->
+      
+
+      <!-- Admin Button -->
+      <div class="mt-4">
+        <a href="{% url 'admin_portal' %}" 
+           class="block text-center border border-red-300 text-red-700 py-2 rounded-lg hover:bg-red-50">
+          Admin Portal Access
+        </a>
+      </div>
+
+      <!-- Link to Signup -->
+      <p class="mt-4 text-center text-sm">
+        Don’t have an account? 
+        <a href="{% url 'signup' %}" class="text-green-600 hover:underline">Sign up here</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
