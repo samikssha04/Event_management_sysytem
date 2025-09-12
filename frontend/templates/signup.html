@@ -17,9 +17,18 @@
     <!-- Card -->
     <div class="bg-white shadow-xl rounded-2xl p-6">
       
-      <!-- Signup Form -->
-      <form method="post" action="{% url 'signup' %}" class="space-y-4">
+      <!-- Show Messages -->
+      {% if messages %}
+        <ul class="mb-4">
+          {% for message in messages %}
+            <li class="text-red-500 text-sm">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
+      <!-- Signup Form -->
+      <form method="POST" action="{% url 'signup' %}" class="space-y-4">
+        {% csrf_token %}
         
         <div>
           <label for="name" class="block text-sm font-medium">Full Name</label>
@@ -44,7 +53,6 @@
           <select id="role" name="role"
             class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
             <option value="student">Student</option>
-           
             <option value="admin">Admin</option>
           </select>
         </div>
