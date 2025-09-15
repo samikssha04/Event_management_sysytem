@@ -1,61 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Student Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  
-  <!-- Welcome Section -->
-  <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl p-6 mb-6">
-    <h1 class="text-2xl font-bold">Welcome back, {{ user.username }}!</h1>
-    {% if user.profile.student_id %}
-      <p class="mt-2 bg-white/20 px-3 py-1 rounded inline-block">
-        ID: {{ user.profile.student_id }}
-      </p>
-    {% endif %}
-  </div>
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<div class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white p-6 rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold">Welcome back, {{ user.username }}!</h1>
+  <p class="text-sm mt-1">Manage your events and stay updated</p>
+</div>
+
+<!-- Stats Section -->
+
+
+<!-- Events Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
 
   <!-- Registered Events -->
-  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-    <h2 class="text-xl font-bold mb-4">My Registered Events</h2>
-    {% if registered_events %}
-      <ul class="space-y-4">
-        {% for event in registered_events %}
-          <li class="p-4 border rounded-lg hover:bg-gray-50">
-            <h3 class="font-semibold">{{ event.title }}</h3>
-            <p class="text-sm text-gray-600">{{ event.date }} • {{ event.location }}</p>
-            <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">{{ event.category }}</span>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="text-gray-500">No registered events yet.</p>
-    {% endif %}
+  <div class="bg-white p-5 rounded-lg shadow-md border">
+    <h3 class="text-lg font-semibold mb-4">Registered Events</h3>
+    <div class="space-y-4">
+      {% for event in registered_events %}
+        <div class="flex items-start space-x-3 p-3 bg-gray-100 rounded-lg">
+          <div class="bg-blue-100 p-2 rounded-lg">📅</div>
+          <div class="flex-1">
+            <h4 class="text-sm font-medium">{{ event.title }}</h4>
+            <div class="flex gap-4 text-xs text-gray-500 mt-1">
+              <span>⏰ {{ event.date }}</span>
+              <span>📍 {{ event.location }}</span>
+            </div>
+            <span class="inline-block mt-2 px-2 py-1 bg-gray-200 text-xs rounded">{{ event.category }}</span>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-gray-500">No registered events yet.</p>
+      {% endfor %}
+    </div>
   </div>
 
   <!-- Upcoming Events -->
-  <div class="bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-xl font-bold mb-4">Upcoming Events</h2>
-    {% if upcoming_events %}
-      <ul class="space-y-4">
-        {% for event in upcoming_events %}
-          <li class="p-4 border rounded-lg hover:bg-gray-50">
-            <h3 class="font-semibold">{{ event.title }}</h3>
-            <p class="text-sm text-gray-600">{{ event.date }} • {{ event.location }}</p>
-            <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">{{ event.category }}</span>
-            <form method="post" action="">
-              {% csrf_token %}
-              <button type="submit" class="mt-2 bg-blue-600 text-white px-3 py-1 rounded">Register</button>
-            </form>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="text-gray-500">No upcoming events available.</p>
-    {% endif %}
+  <div class="bg-white p-5 rounded-lg shadow-md border">
+    <h3 class="text-lg font-semibold mb-4">Upcoming Events</h3>
+    <div class="space-y-4">
+      {% for event in upcoming_events %}
+        <div class="flex items-start space-x-3 p-3 bg-gray-100 rounded-lg">
+          <div class="bg-green-100 p-2 rounded-lg">🎉</div>
+          <div class="flex-1">
+            <h4 class="text-sm font-medium">{{ event.title }}</h4>
+            <div class="flex gap-4 text-xs text-gray-500 mt-1">
+              <span>⏰ {{ event.date }}</span>
+              <span>📍 {{ event.location }}</span>
+            </div>
+            <span class="inline-block mt-2 px-2 py-1 bg-gray-200 text-xs rounded">{{ event.category }}</span>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-gray-500">No upcoming events right now.</p>
+      {% endfor %}
+    </div>
   </div>
+</div>
 
-</body>
-</html>
+<!-- Notifications -->
+
+
+<!-- All Events + Registered Events Section -->
+<div class="bg-white p-5 rounded-lg shadow-md border mt-8">
+  <h2 class="text-xl font-semibold">All Events</h2>
+  <ul class="list-disc ml-6 mt-2">
+    {% for event in events %}
+      <li>
+        <a href="{% url 'event_detail' event.id %}" class="text-blue-600 hover:underline">
+          {{ event.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6">My Registered Events (Detailed)</h2>
+  <ul class="list-disc ml-6 mt-2">
+    {% for reg in registrations %}
+      <li>{{ reg.event.title }} ({{ reg.registered_at|date:"d M Y, H:i" }})</li>
+    {% empty %}
+      <li>No events registered yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex h-16 items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <div class="bg-indigo-600 rounded-lg p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-white" fill="none" 
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  stroke-width="2" d="M12 14l6.16-3.422A12.083 12.083 0 0118 20.944M12 14L5.84 10.578A12.083 12.083 0 006 20.944M12 14v7" />
+          </svg>
+        </div>
+        <div class="hidden sm:block">
+          <h1 class="font-bold text-lg">EventHub</h1>
+          <p class="text-xs text-gray-500">College Events</p>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-4">
+       
+        <a href="/events/" class="px-3 py-2 rounded hover:bg-gray-100">Events</a>
+        <a href="/student-dashboard/" class="px-3 py-2 rounded hover:bg-gray-100">Dashboard</a>
+        <!-- Role based -->
+        <!-- {% if user.profile.role == 'admin' %} -->
+       
+
+        <!-- {% endif %} -->
+        <a href="/results/" class="px-3 py-2 rounded hover:bg-gray-100">Results</a>
+      </div>
+
+      <!-- Right Side -->
+      <div class="flex items-center space-x-3">
+        
+        <!-- Notifications -->
+        <button class="relative p-2 rounded-full hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               class="h-5 w-5 text-gray-600" fill="none" 
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  stroke-width="2" d="M15 17h5l-1.405-1.405M19 13V7a7 7 0 10-14 0v6l-2 2h18l-2-2z" />
+          </svg>
+          <!-- Show only if notifications exist -->
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            3
+          </span>
+        </button>
+
+        <!-- User Dropdown -->
+        <div class="relative group">
+          <button class="h-10 w-10 rounded-full bg-indigo-600 text-white flex items-center justify-center">
+            U
+          </button>
+          <!-- Dropdown -->
+          <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md border hidden group-hover:block">
+            <div class="p-3 border-b">
+              <p class="text-sm font-medium">Username</p>
+              <p class="text-xs text-gray-500">user@email.com</p>
+              <span class="inline-block mt-1 px-2 py-0.5 bg-gray-100 text-xs rounded">Student</span>
+            </div>
+            <a href="/profile/" class="block px-4 py-2 text-sm hover:bg-gray-100">Profile</a>
+            <form method="post" action="/logout/">
+              {% csrf_token %}
+              <button type="submit" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">Log out</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden p-2 rounded hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</nav>

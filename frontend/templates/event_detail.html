@@ -1,0 +1,12 @@
+<h1 class="text-2xl font-bold">{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p><b>Date:</b> {{ event.date }} at {{ event.time }}</p>
+<p><b>Location:</b> {{ event.location }}</p>
+
+<form action="{% url 'register_event' event.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" 
+        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        Register
+    </button>
+</form>

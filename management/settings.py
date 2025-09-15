@@ -125,3 +125,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'student_dashboard'
 LOGOUT_REDIRECT_URL = 'login'
+ADMIN_LOGIN_URL = 'admin_dashboard'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+LOGIN_URL = 'login'
+BASE_DIR = Path(__file__).resolve().parent.parent
+AUTH_USER_MODEL = 'app1.CustomUser'
+
+

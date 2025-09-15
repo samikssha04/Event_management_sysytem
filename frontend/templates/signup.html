@@ -16,8 +16,8 @@
 
     <!-- Card -->
     <div class="bg-white shadow-xl rounded-2xl p-6">
-      
-      <!-- Show Messages -->
+
+      <!-- Display messages -->
       {% if messages %}
         <ul class="mb-4">
           {% for message in messages %}
@@ -29,41 +29,50 @@
       <!-- Signup Form -->
       <form method="POST" action="{% url 'signup' %}" class="space-y-4">
         {% csrf_token %}
-        
+
+        <!-- Email -->
         <div>
-          <label for="name" class="block text-sm font-medium">Full Name</label>
-          <input type="text" id="name" name="name" 
-            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          <label for="id_email" class="block text-sm font-medium">Email</label>
+          <input type="email" name="email" id="id_email" placeholder="Enter your email"
+                 value="{{ form.email.value|default:'' }}"
+                 class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          {% if form.email.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>
+          {% endif %}
         </div>
 
+        <!-- Password -->
         <div>
-          <label for="email" class="block text-sm font-medium">Email</label>
-          <input type="email" id="email" name="email" 
-            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          <label for="id_password" class="block text-sm font-medium">Password</label>
+          <input type="password" name="password" id="id_password" placeholder="Create a password"
+                 class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          {% if form.password.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.password.errors.0 }}</p>
+          {% endif %}
         </div>
 
+        <!-- Confirm Password -->
         <div>
-          <label for="password" class="block text-sm font-medium">Password</label>
-          <input type="password" id="password" name="password" placeholder="Create a password"
-            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          <label for="id_password2" class="block text-sm font-medium">Confirm Password</label>
+          <input type="password" name="password2" id="id_password2" placeholder="Confirm your password"
+                 class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+          {% if form.password2.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.password2.errors.0 }}</p>
+          {% endif %}
         </div>
 
+        <!-- Student ID -->
         <div>
-          <label for="role" class="block text-sm font-medium">Role</label>
-          <select id="role" name="role"
-            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
-          </select>
+          <label for="id_student_id" class="block text-sm font-medium">Student ID (optional)</label>
+          <input type="text" name="student_id" id="id_student_id" placeholder="Enter your student ID"
+                 value="{{ form.student_id.value|default:'' }}"
+                 class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+          {% if form.student_id.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.student_id.errors.0 }}</p>
+          {% endif %}
         </div>
 
-        <!-- Student ID (only required for students) -->
-        <div>
-          <label for="student_id" class="block text-sm font-medium">Student ID</label>
-          <input type="text" id="student_id" name="student_id" 
-            class="w-full pl-3 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
-        </div>
-
+        <!-- Submit button -->
         <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
           Create Account
         </button>
