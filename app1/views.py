@@ -32,20 +32,18 @@ def login_view(request):
 
     return render(request, 'login.html')
 
-# ---------------- LOGOUT ----------------
 def logout_view(request):
     logout(request)
     return redirect("login")
 
 
-# ---------------- SIGNUP -------------
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Account created successfully! Please log in.")
-            return redirect('login')  # replace with your login URL name
+            return redirect('login')  
         else:
             messages.error(request, "Please correct the errors below.")
     else:
@@ -54,8 +52,6 @@ def signup_view(request):
     return render(request, 'signup.html', {'form': form})
 
 
-
-# ---------------- STUDENT DASHBOARD ----------------
 @login_required
 def student_dashboard_view(request):
     user = request.user
@@ -73,13 +69,10 @@ def student_dashboard_view(request):
     return render(request, "student_dashboard.html", context)
 
 
-# ---------------- EVENT DETAIL ----------------
 def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)
     return render(request, "event_detail.html", {"event": event})
 
-
-# ---------------- EVENT LIST ----------------
 @login_required
 def events_list_view(request):
     events = Event.objects.all()
@@ -107,7 +100,6 @@ def events_list_view(request):
     return render(request, "event_list.html", context)
 
 
-# ---------------- ENROLL EVENT ----------------
 @login_required
 def enroll_event_view(request, event_id):
     """Register current student for an event"""
@@ -124,7 +116,7 @@ def enroll_event_view(request, event_id):
 
 # ---------------- REGISTER EVENT (for student dashboard quick register) ----------------
 def register_event(request, event_id):
-    if not request.user.is_authenticated:   # student must be logged in
+    if not request.user.is_authenticated:   
         return redirect("login")
 
     event = get_object_or_404(Event, id=event_id)

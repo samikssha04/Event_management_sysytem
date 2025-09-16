@@ -27,7 +27,7 @@
             <h4 class="text-sm font-medium">{{ event.title }}</h4>
             <div class="flex gap-4 text-xs text-gray-500 mt-1">
               <span>⏰ {{ event.date }}</span>
-              <span>📍 {{ event.location }}</span>
+             
             </div>
             <span class="inline-block mt-2 px-2 py-1 bg-gray-200 text-xs rounded">{{ event.category }}</span>
           </div>
@@ -64,27 +64,8 @@
 <!-- Notifications -->
 
 
-<!-- All Events + Registered Events Section -->
-<div class="bg-white p-5 rounded-lg shadow-md border mt-8">
-  <h2 class="text-xl font-semibold">All Events</h2>
-  <ul class="list-disc ml-6 mt-2">
-    {% for event in events %}
-      <li>
-        <a href="{% url 'event_detail' event.id %}" class="text-blue-600 hover:underline">
-          {{ event.title }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
 
-  <h2 class="text-xl font-semibold mt-6">My Registered Events (Detailed)</h2>
-  <ul class="list-disc ml-6 mt-2">
-    {% for reg in registrations %}
-      <li>{{ reg.event.title }} ({{ reg.registered_at|date:"d M Y, H:i" }})</li>
-    {% empty %}
-      <li>No events registered yet.</li>
-    {% endfor %}
-  </ul>
-</div>
+
+ 
 
 {% endblock %}

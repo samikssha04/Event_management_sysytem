@@ -69,7 +69,11 @@ class Event(models.Model):
     max_participants = models.PositiveIntegerField(default=100)
     enrolled_count = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to="event_images/", null=True, blank=True)
-
+    venue = models.CharField(max_length=200, default="")   # ✅ new
+    poster = models.ImageField(
+         upload_to='posters/',                # folder inside media
+        null=True, blank=True                 # allow empty posters
+    )
     def __str__(self):
         return self.title
 
