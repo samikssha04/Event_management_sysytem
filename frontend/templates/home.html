@@ -8,13 +8,25 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #08c34f 0%, #bcc3db 100%);
+            background:
+              url("/media/posters/bg.jpeg ") no-repeat center center/cover;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 100px 70px;
+            text-align: center;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+        }
+
         h1, p {
             color: #fff;
             text-align: center;
@@ -48,12 +60,14 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Eventhub 🎉</h1>
-    <p>Connect. Participate. Celebrate – All in one place with EventHub</p>
+    <div class="content-box">
+        <h1>Welcome to Eventhub 🎉</h1>
+        <p>Connect. Participate. Celebrate – All in one place with EventHub</p>
     
-    <div class="btn-group">
+        <div class="btn-group">
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'signup' %}">Sign Up</a>
+        </div>
     </div>
 </body>
 </html>
